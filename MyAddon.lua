@@ -1,14 +1,14 @@
 -----------------
---MyAddon--
+--ChatCopyPaste--
 -----------------
 --A simple copy paste addon for chat.
 --Novaspark-Arugal OCE (classic) / Venomisto-Frostmourne OCE (retail).
 --https://www.curseforge.com/members/venomisto/projects
 --When you hover over the chat window a small icon will appear in the bottom-right corner.
 --Click the icon so you can highlight and copy chat.
---Use /MyAddon or /ccp for options.
+--Use /chatcopypaste or /ccp for options.
 
-CCP = LibStub("AceAddon-3.0"):NewAddon("MyAddon");
+CCP = LibStub("AceAddon-3.0"):NewAddon("ChatCopyPaste");
 
 local function addBackdrop(string)
 	if (BackdropTemplateMixin) then
@@ -104,8 +104,8 @@ end)
 
 function CCP:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("CCPOptions", CCP.optionDefaults, "Default");
-    LibStub("AceConfig-3.0"):RegisterOptionsTable("MyAddon", CCP.options);
-	self.CCPOptions = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("MyAddon", "MyAddon");
+    LibStub("AceConfig-3.0"):RegisterOptionsTable("ChatCopyPaste", CCP.options);
+	self.CCPOptions = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("ChatCopyPaste", "ChatCopyPaste");
 	CCP:updateChatOptions();
 	CCP:loadUrlColor();
 end
@@ -278,7 +278,7 @@ function CCP.makeChatWindowButtons(i)
 	end
 	local obj = CreateFrame("Button", "ccpChatCopyIcon" .. i, _G['ChatFrame'..i]);
 	obj.bg = obj:CreateTexture(nil,	"ARTWORK");
-	obj.bg:SetTexture("Interface\\Icons\\inv_misc_bomb_04");
+	obj.bg:SetTexture("Interface\\AddOns\\ChatCopyPaste\\Media\\copypaste");
 	obj.bg:SetAllPoints(obj);
 	obj:SetPoint("BOTTOMRIGHT", -2, -3);
 	obj.texture = obj.bg;
@@ -430,14 +430,14 @@ end
 -------------
 
 --Open the options GUI
-SLASH_CCPOPTIONSCMD1, SLASH_CCPOPTIONSCMD2 = '/MyAddon', '/ccp';
+SLASH_CCPOPTIONSCMD1, SLASH_CCPOPTIONSCMD2 = '/chatcopypaste', '/ccp';
 function SlashCmdList.CCPOPTIONSCMD(msg, editBox)
-	InterfaceOptionsFrame_OpenToCategory("MyAddon");
-	InterfaceOptionsFrame_OpenToCategory("MyAddon");
+	InterfaceOptionsFrame_OpenToCategory("ChatCopyPaste");
+	InterfaceOptionsFrame_OpenToCategory("ChatCopyPaste");
 end
 
 CCP.options = {
-	name = "MyAddon v" .. GetAddOnMetadata("MyAddon", "Version"),
+	name = "ChatCopyPaste v" .. GetAddOnMetadata("ChatCopyPaste", "Version"),
 	handler = CCP,
 	type = 'group',
 	args = {
