@@ -1,15 +1,25 @@
 local LPName, LPaddon = ...
 
+local function CreateFrameWithBackdrop(frameType, name, parent, template, backdropTemplate)
+    local frame = CreateFrame(frameType, name, parent, template)
+    Mixin(frame, BackdropTemplateMixin)
+    frame:OnBackdropLoaded()
+    if backdropTemplate then
+        frame:SetBackdrop(backdropTemplate)
+    end
+    return frame
+end
+
 local whisperFrame = CreateFrame("ScrollingMessageFrame", "FilteredWhispersFrame", UIParent)
 whisperFrame:SetSize(400, 300)
 whisperFrame:SetPoint("CENTER")
-whisperFrame:SetBackdrop({
+whisperFrame = CreateFrameWithBackdrop("ScrollingMessageFrame", "FilteredWhispersFrame", UIParent, nil, {
     bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
     edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     tile = true,
     tileSize = 32,
     edgeSize = 32,
-    insets = {left = 11, right = 12, top = 12, bottom = 11}
+    insets = { left = 11, right = 12, top = 12, bottom = 11 },
 })
 whisperFrame:SetFontObject(GameFontNormal)
 whisperFrame:SetJustifyH("LEFT")
