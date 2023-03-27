@@ -3,7 +3,6 @@
 ## Interface: 90001
 ## Author: Your Name
 ## Notes: This is my first addon.
-## Dependencies: LibStub
 
 MyAddon.lua
 MyAddon.xml
